@@ -1,6 +1,7 @@
 export const data = [
   {
-    "title": "Work",
+    "title": "Trabalho",
+    "color": "#ffffff",
     "timeframes": {
       "daily": {
         "current": 5,
@@ -17,7 +18,7 @@ export const data = [
     }
   },
   {
-    "title": "Play",
+    "title": "Lazer",
     "timeframes": {
       "daily": {
         "current": 1,
@@ -34,7 +35,7 @@ export const data = [
     }
   },
   {
-    "title": "Study",
+    "title": "Estudo",
     "timeframes": {
       "daily": {
         "current": 0,
@@ -51,7 +52,7 @@ export const data = [
     }
   },
   {
-    "title": "Exercise",
+    "title": "Exercicio",
     "timeframes": {
       "daily": {
         "current": 1,
@@ -85,7 +86,7 @@ export const data = [
     }
   },
   {
-    "title": "Self Care",
+    "title": "Saúde",
     "timeframes": {
       "daily": {
         "current": 0,

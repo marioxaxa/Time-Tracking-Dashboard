@@ -101,14 +101,9 @@ function medidaDeTempo(timeType) {
   var currentTimeType = timeType
 }
 
-const BoxTime = () => {
-
-}
-
-function boxTime(timetype) {
-
+function BoxTime({ data, timetype }) {
   switch (timetype) {
-    case "0":
+    case 0:
       return (
         <div>
           <div className='Box-time'>
@@ -119,39 +114,39 @@ function boxTime(timetype) {
           </div>
         </div>
       )
-      case "1":
-        return (
-          <div>
-            <div className='Box-time'>
-              <p>{data.timeframes.weekly.current}hrs</p>
-            </div>
-            <div className='Box-past'>
-              <p>Ultima Semana - {data.timeframes.weekly.previous}hrs</p>
-            </div>
+    case 1:
+      return (
+        <div>
+          <div className='Box-time'>
+            <p>{data.timeframes.weekly.current}hrs</p>
           </div>
-        )
-        case "2":
-          return (
-            <div>
-              <div className='Box-time'>
-                <p>{data.timeframes.monthly.current}hrs</p>
-              </div>
-              <div className='Box-past'>
-                <p>Ultimo mês - {data.timeframes.monthly.previous}hrs</p>
-              </div>
-            </div>
-          )
-        default:
-          return (
-            <div>
-              <div className='Box-time'>
-                <p>{data.timeframes.daily.current}hrs</p>
-              </div>
-              <div className='Box-past'>
-                <p>Ultimo Dia - {data.timeframes.daily.previous}hrs</p>
-              </div>
-            </div>
-          )
+          <div className='Box-past'>
+            <p>Ultima Semana - {data.timeframes.weekly.previous}hrs</p>
+          </div>
+        </div>
+      )
+    case 2:
+      return (
+        <div>
+          <div className='Box-time'>
+            <p>{data.timeframes.monthly.current}hrs</p>
+          </div>
+          <div className='Box-past'>
+            <p>Ultimo mês - {data.timeframes.monthly.previous}hrs</p>
+          </div>
+        </div>
+      )
+    default:
+      return (
+        <div>
+          <div className='Box-time'>
+            <p>{data.timeframes.daily.current}hrs</p>
+          </div>
+          <div className='Box-past'>
+            <p>Ultimo Dia - {data.timeframes.daily.previous}hrs</p>
+          </div>
+        </div>
+      )
   }
 
 }
@@ -221,6 +216,8 @@ function Box(props) {
 */
 
 function App() {
+  const [ medidaTempo, setMedidaTempo ] = useState(0);
+
   return (
     <div className="App">
       <div className='Grid'>
@@ -236,31 +233,33 @@ function App() {
           </div>
           <div className='Box-bottom' id='Profile-bottom'>
             <div className='Buttons'>
-              <div onClick={medidaDeTempo(0)}>Daily</div>
-              <div onClick={medidaDeTempo(1)}>Weekly</div>
-              <div onClick={medidaDeTempo(2)}>Monthly</div>
+              <button onClick={ () => setMedidaTempo(0) }>Daily</button>
+              <button onClick={ () => setMedidaTempo(1) }>Weekly</button>
+              <button onClick={ () => setMedidaTempo(2) }>Monthly</button>
             </div>
           </div>
         </div>
-        {data.map((data) => {
-        return (
-          <div>
-            {boxColor(data.title)}
-            <div className='Box-bottom'>
-              <div className='Box-type'>
-                <p>{data.title}</p>
-                <div className='Box-dots'>
-                  <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="#BBC0FF" fill-rule="evenodd" />
-                  </svg>
+        {data.map((d) => {
+          return (
+            <div>
+              { boxColor(d.title) }
+              <div className='Box-bottom'>
+                <div className='Box-type'>
+                  <p>{ d.title }</p>
+                  <div className='Box-dots'>
+                    <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="#BBC0FF" fill-rule="evenodd" />
+                    </svg>
+                  </div>
                 </div>
+                <BoxTime 
+                  data={ d }
+                  timetype={ medidaTempo }
+                />
               </div>
-              {boxTime()}
             </div>
-          </div>
-        )
-      })}
-
+          )
+        })}
       </div>
     </div>
   );

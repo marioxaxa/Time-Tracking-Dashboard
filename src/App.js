@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import { data } from './data.js'
 
@@ -23,7 +23,7 @@ const styles = {
   }
 }
 
-function boxColor(type) {
+function boxTop(type) {
     switch (type) {
     case "Trabalho":
       return (
@@ -97,20 +97,11 @@ function boxtype(type) {
   }
 }
 
-function medidaDeTempo(timeType) {
-  var currentTimeType = timeType
-}
-
-const BoxTime = () => {
-
-}
-
-function boxTime(timetype) {
-
+function BoxTime({timetype, data}) {
   switch (timetype) {
-    case "0":
+    case 0:
       return (
-        <div>
+        <div className='Box-words'>
           <div className='Box-time'>
             <p>{data.timeframes.daily.current}hrs</p>
           </div>
@@ -119,9 +110,9 @@ function boxTime(timetype) {
           </div>
         </div>
       )
-      case "1":
+      case 1:
         return (
-          <div>
+          <div className='Box-words'>
             <div className='Box-time'>
               <p>{data.timeframes.weekly.current}hrs</p>
             </div>
@@ -130,20 +121,20 @@ function boxTime(timetype) {
             </div>
           </div>
         )
-        case "2":
+        case 2:
           return (
-            <div>
+            <div className='Box-words'>
               <div className='Box-time'>
                 <p>{data.timeframes.monthly.current}hrs</p>
               </div>
               <div className='Box-past'>
-                <p>Ultimo mês - {data.timeframes.monthly.previous}hrs</p>
+                <p>Ultimo Mês - {data.timeframes.monthly.previous}hrs</p>
               </div>
             </div>
           )
         default:
           return (
-            <div>
+            <div className='Box-words'>
               <div className='Box-time'>
                 <p>{data.timeframes.daily.current}hrs</p>
               </div>
@@ -221,6 +212,9 @@ function Box(props) {
 */
 
 function App() {
+
+  const [ medidaTempo, setMedidaTempo ] = useState(0);
+
   return (
     <div className="App">
       <div className='Grid'>
@@ -230,32 +224,38 @@ function App() {
               <img src='../image-jeremy.png' alt='Foto de perfil.' />
             </div>
             <div className='Profile-words'>
-              <p className='Profile-report'>Report for</p>
+              <p className='Profile-report'>Relátorio para</p>
               <p className='Profile-name'>Jeremy <br /> Robson</p>
             </div>
           </div>
           <div className='Box-bottom' id='Profile-bottom'>
             <div className='Buttons'>
-              <div onClick={medidaDeTempo(0)}>Daily</div>
-              <div onClick={medidaDeTempo(1)}>Weekly</div>
-              <div onClick={medidaDeTempo(2)}>Monthly</div>
+              <div onClick={() => setMedidaTempo(0)}>
+                <div>Diario</div>
+              </div>
+              <div onClick={() => setMedidaTempo(1)}>
+                <div>Semanal</div>
+              </div>
+              <div onClick={() => setMedidaTempo(2)}>
+                <div>Mensal</div>
+              </div>
             </div>
           </div>
         </div>
-        {data.map((data) => {
+        {data.map((d) => {
         return (
           <div>
-            {boxColor(data.title)}
+            {boxTop(d.title)}
             <div className='Box-bottom'>
               <div className='Box-type'>
-                <p>{data.title}</p>
+                <p>{d.title}</p>
                 <div className='Box-dots'>
                   <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="#BBC0FF" fill-rule="evenodd" />
                   </svg>
                 </div>
               </div>
-              {boxTime()}
+              <BoxTime data={d} timetype={medidaTempo} />
             </div>
           </div>
         )

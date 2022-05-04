@@ -51,6 +51,8 @@ body {
 
 .Box-top > svg {
   margin-right: 1vw;
+  max-width: 40vmin;
+  max-height: 14vmin;
 }
 
 .Box-bottom {
@@ -122,8 +124,8 @@ body {
 }
 
 .Buttons {
-  margin: 1vw;
-  margin-left: 2vw;
+  margin: 1vmin;
+  margin-left: 4vmin;
   grid-row: 5/7;
   display: grid;
   grid-template-columns: 1fr;
@@ -131,6 +133,17 @@ body {
   align-items: center;
   justify-items: start;
   font-size: clamp(8px, calc(3vmin), 60px);
+}
+
+.Buttons > div{
+  padding: 1vmin;
+  min-width: 32vmin;
+  display: flex;
+  justify-content: start;
+}
+
+.Buttons > div:hover {
+  background-color: hsl(240, 40%, 50%);
 }
 
 .Box-type {
@@ -160,8 +173,14 @@ body {
   justify-content: end;
 }
 
+.Box-words {
+  grid-row: 2/5;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+}
+
 .Box-time {
-  grid-row: 2/4;
+  grid-row: 1/3;
   font-size: clamp(18px, calc(8vmin), 60px);
   display: flex;
   justify-items: start;
@@ -182,5 +201,7 @@ body {
   margin: 0;
   margin-left: 2vw;
   font-size: clamp(8px, calc(3vmin), 60px);
+  grid-row: 3;
+  color: hsl(0, 0%, 80%);
 }
 
